@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        background-image: linear-gradient(to right, rgb(250, 249, 249), rgb(64, 224, 245));
+        display: flex;
+        height: 100vh;
+        width: 100vw;
+    }
+
+    .obj {
+        height: 6rem;
+        width: 6rem;
+        background-color: rgba(34, 13, 13, 0.733);
+        border-radius: 50%;
+        margin: 30vh 2vw;
+        transition: transform 2s ease-in-out;        
+    }
+
+    .obj:hover {
+        transform: translate(83vw, -26vh);
+        /* transform: translate(85vw, -45vh); */
+        /* animation: myMove 2s ease-in-out 0s 1 normal forwards; */
+        /* animation-fill-mode: both, forwards, none; */
+        
+
+    }
+
+    /* @keyframes myMove {
+      from{transform: translateX(0);}to { transform: translate(83vw,-26vh);}
+    } */
+</style>
+
+<body>
+    <div class="container">
+            <div class="obj"></div>
+    </div>
+</body>
+
+</html>
