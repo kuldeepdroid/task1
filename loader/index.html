@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,17 +13,12 @@
         * {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
         .container {
             display: flex;
             align-items: center;
             justify-content: center;
-            /* width: 100vw; */
-            margin: 0;
-            /* height: 100vh; */
-            /* background-color: rgb(184, 193, 218); */
         }
 
         #loader {
@@ -37,16 +33,21 @@
         .typing {
             width: 60vw;
             text-align: center;
-            font-size: 3rem;
+            font-size: 3em;
+            transition: s;
             font-weight: 800;
-            font-family: Arial, Helvetica, sans-serif;
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         }
 
         #content {
             display: none;
-            background-color: aquamarine;
+            background-color: rgb(166, 235, 246);
             height: 100vh;
             width: 100vw;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
         }
 
         #logo {
@@ -57,42 +58,35 @@
         }
 
         #split {
-            display: none;
-            flex-direction: column;
-            width: 100vw;
-            /* height: 92vh; */
-            z-index: 9999;
             position: absolute;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            display: flex;
             flex-direction: column;
         }
 
         #topsplit {
-            background-color: aqua;
-            width: 100vw;
-            height: 50vh;
-            /* transform: translateX(0vw); */
             position: absolute;
-            animation: topsplit 1s ease-in
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 50vh;
+            background-color:  rgb(175, 222, 229);
         }
-
+        
         #bottomsplit {
-            background-color: white;
-            width: 100vw;
-            height: 50vh;
+            position: absolute;
             bottom: 0;
-            /* position: absolute; */
-            animation: bottomsplit 1s ease-in
+            right: 0;
+            width: 0;
+            height: 50vh;
+            background-color:  rgb(175, 222, 229);
         }
 
-        .show {
-            transform: translateX(0);
-        }
-        .bottom{
-            background-color: aqua;
-            bottom: 0;
-            position: absolute;
-            width: 100vw;
-            height: 50vh;
+        #contentTxt {
+            animation: fadeIn .5s ease-in-out ;
         }
 
         .img {
@@ -102,24 +96,24 @@
 
         @keyframes topsplit {
             0% {
-                width: 0vw;
+                width: 0;
             }
 
             100% {
-                width:  100wv;
-              
+                width: 100vw;
             }
         }
 
         @keyframes bottomsplit {
             0% {
-                width: 100vw;
+                width: 0;
             }
 
             100% {
-                width: 0vw;
+                width: 100vw;
             }
         }
+
 
         @keyframes fadeIn {
             0% {
@@ -135,59 +129,60 @@
 
 <body>
     <div class="container">
-        
 
-        <div id="loader">
-            <div id="typing" class="typing"></div>
-            <div class="img">
-                <img id="logo" src="logo.svg" alt="">
-            </div>
-        </div>
-        <div id="split">
-            <div id="topsplit" class="topsplit "></div>
-            <div class="bottom">
-                <div id="bottomsplit" class="bottomsplit ">
+        <div id="load">
+            <div id="loader">
+                <div id="typing" class="typing"></div>
+                <div class="img">
+                    <img id="logo" src="logo.svg" alt="Logo">
                 </div>
+            </div>
+            <div id="split">
+                <div id="topsplit" class="topsplit "></div>
+                <div id="bottomsplit" class="bottomsplit "></div>
             </div>
         </div>
 
         <div id="content">
-            <p>content</p>
+            <p id="contentTxt">content</p>
         </div>
     </div>
 
     <script>
+
         const txt = "WE ARE ROBOT INTEGRATOR";
-        let TypingElement = document.getElementById("typing")
+        let TypingElement = document.getElementById("typing");
         let i = 0;
+
         window.onload = function () {
-            setTimeout(function () {
-                Typing();
-            }, 1000);
+            setTimeout(Typing, 900);
         };
 
-        const Typing = () => {
+        function Typing() {
             if (i < txt.length) {
                 TypingElement.innerHTML += txt[i];
                 i++;
-                setTimeout(Typing, 100);
+                setTimeout(Typing, 50);
             } else {
                 document.getElementById("logo").style.display = "block"
-                setTimeout(()=>{
-                    // document.getElementById('loader').style.display = 'none';
-                    document.getElementById('split').style.display = 'block';
-                },1000)
-                setTimeout(()=>{
-                    document.getElementById('loader').style.display = 'none';
-                    document.getElementById('split').style.display = 'none';
-                    document.getElementById('content').style.display = 'block';
-                },2000)
+                setTimeout(SplitAnimation, 900);
             }
         }
+        
+        function SplitAnimation() {
+            document.getElementById("split").style.display = "flex";
+            document.getElementById("topsplit").style.animation = "topsplit .7s ease-in forwards";
+            document.getElementById("bottomsplit").style.animation = "bottomsplit .7s ease-in forwards";
+            
+            setTimeout(() => {
+                let content = document.getElementById("content")
+                document.getElementById("load").style.display = "none";
+                content.style.display = "flex"
+                // content.style.animation = "fadeIn .5s ease-in"
 
-        const Split = () => {
-
+            }, 750);
         }
+
 
     </script>
 </body>
