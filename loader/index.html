@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* width: 100vw; */
+            margin: 0;
+            /* height: 100vh; */
+            /* background-color: rgb(184, 193, 218); */
+        }
+
+        #loader {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .typing {
+            width: 60vw;
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 800;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        #content {
+            display: none;
+            background-color: aquamarine;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        #logo {
+            padding: 3rem 0;
+            display: none;
+            margin: 0 auto;
+            animation: fadeIn 2s ease-in;
+        }
+
+        #split {
+            display: none;
+            flex-direction: column;
+            width: 100vw;
+            /* height: 92vh; */
+            z-index: 9999;
+            position: absolute;
+            flex-direction: column;
+        }
+
+        #topsplit {
+            background-color: aqua;
+            width: 100vw;
+            height: 50vh;
+            /* transform: translateX(0vw); */
+            position: absolute;
+            animation: topsplit 1s ease-in
+        }
+
+        #bottomsplit {
+            background-color: white;
+            width: 100vw;
+            height: 50vh;
+            bottom: 0;
+            /* position: absolute; */
+            animation: bottomsplit 1s ease-in
+        }
+
+        .show {
+            transform: translateX(0);
+        }
+        .bottom{
+            background-color: aqua;
+            bottom: 0;
+            position: absolute;
+            width: 100vw;
+            height: 50vh;
+        }
+
+        .img {
+            height: 20vh;
+            width: 100vw;
+        }
+
+        @keyframes topsplit {
+            0% {
+                width: 0vw;
+            }
+
+            100% {
+                width:  100wv;
+              
+            }
+        }
+
+        @keyframes bottomsplit {
+            0% {
+                width: 100vw;
+            }
+
+            100% {
+                width: 0vw;
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        
+
+        <div id="loader">
+            <div id="typing" class="typing"></div>
+            <div class="img">
+                <img id="logo" src="logo.svg" alt="">
+            </div>
+        </div>
+        <div id="split">
+            <div id="topsplit" class="topsplit "></div>
+            <div class="bottom">
+                <div id="bottomsplit" class="bottomsplit ">
+                </div>
+            </div>
+        </div>
+
+        <div id="content">
+            <p>content</p>
+        </div>
+    </div>
+
+    <script>
+        const txt = "WE ARE ROBOT INTEGRATOR";
+        let TypingElement = document.getElementById("typing")
+        let i = 0;
+        window.onload = function () {
+            setTimeout(function () {
+                Typing();
+            }, 1000);
+        };
+
+        const Typing = () => {
+            if (i < txt.length) {
+                TypingElement.innerHTML += txt[i];
+                i++;
+                setTimeout(Typing, 100);
+            } else {
+                document.getElementById("logo").style.display = "block"
+                setTimeout(()=>{
+                    // document.getElementById('loader').style.display = 'none';
+                    document.getElementById('split').style.display = 'block';
+                },1000)
+                setTimeout(()=>{
+                    document.getElementById('loader').style.display = 'none';
+                    document.getElementById('split').style.display = 'none';
+                    document.getElementById('content').style.display = 'block';
+                },2000)
+            }
+        }
+
+        const Split = () => {
+
+        }
+
+    </script>
+</body>
+
+</html>
